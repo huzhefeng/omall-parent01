@@ -1,9 +1,8 @@
 package com.offcn.product.service;
 
-import com.offcn.model.product.BaseAttrInfo;
-import com.offcn.model.product.BaseCategory1;
-import com.offcn.model.product.BaseCategory2;
-import com.offcn.model.product.BaseCategory3;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.offcn.model.product.*;
 
 import java.util.List;
 
@@ -59,4 +58,12 @@ public interface ManageService {
      * @return
      */
     BaseAttrInfo getAttrInfo(Long attrId);
+
+    /**
+     * spu查询 分页展示
+     * @param pageParam 分页属性
+     * @param spuInfo   spu的数据
+     * @return
+     */
+    IPage<SpuInfo> getSpuInfoPage(Page<SpuInfo> pageParam,SpuInfo spuInfo);
 }

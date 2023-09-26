@@ -1,6 +1,8 @@
 package com.offcn.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.offcn.model.product.*;
 import com.offcn.product.mapper.*;
 import com.offcn.product.service.ManageService;
@@ -29,6 +31,9 @@ public class ManageServiceImpl implements ManageService {
 
     @Autowired
     private BaseAttrValueMapper baseAttrValueMapper;
+
+    @Autowired
+    private SpuInfoMapper spuInfoMapper;
 
     @Override
     public List<BaseCategory1> getCategory1() {
@@ -101,6 +106,14 @@ public class ManageServiceImpl implements ManageService {
         //查询到最新的平台属性值集合数据放入到平台属性中
         baseAttrInfo.setAttrValueList(getAttrValueList(attrId));
         return baseAttrInfo;
+    }
+
+    @Override
+    public IPage<SpuInfo> getSpuInfoPage(Page<SpuInfo> pageParam, SpuInfo spuInfo) {
+        QueryWrapper<SpuInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("category3_id", spuInfo.getCategory3Id());
+        queryWrapper.orderByDesc("id");
+        return spuInfoMapper.selectPage(pageParam, queryWrapper);
     }
 
     /**

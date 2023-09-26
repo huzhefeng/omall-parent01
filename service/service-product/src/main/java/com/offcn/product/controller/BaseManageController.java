@@ -89,4 +89,5 @@ public class BaseManageController {
         List<BaseAttrValue> attrValueList = attrInfo.getAttrValueList();
         return Result.ok(attrValueList);
     }
+
 }
