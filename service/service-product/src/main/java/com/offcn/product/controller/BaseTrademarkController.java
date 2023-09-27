@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(value = "品牌管理接口")
 @RestController
 @RequestMapping("/admin/product/baseTrademark")
@@ -19,6 +21,13 @@ public class BaseTrademarkController {
 
     @Autowired
     private BaseTrademarkService baseTrademarkService;
+
+    @GetMapping("getTrademarkList")
+    public Result<List<BaseTrademark>> getTrademarkList(){
+        List<BaseTrademark> baseTrademarkList = baseTrademarkService.list(null);
+        return Result.ok(baseTrademarkList);
+    }
+
 
     @ApiOperation(value = "分页列表")
     @ApiImplicitParams({
