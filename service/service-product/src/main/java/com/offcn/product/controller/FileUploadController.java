@@ -2,8 +2,12 @@ package com.offcn.product.controller;
 
 import com.offcn.common.result.Result;
 import org.apache.commons.io.FilenameUtils;
-import org.csource.fastdfs.*;
+import org.csource.fastdfs.ClientGlobal;
+import org.csource.fastdfs.StorageClient1;
+import org.csource.fastdfs.TrackerClient;
+import org.csource.fastdfs.TrackerServer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,27 +16,35 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("admin/product/")
 public class FileUploadController {
 
-    @Value("${fileServer.url}")//这里注意$
+    //读取配置文件中，自定义文件存储服务器的地址和端口
+    @Value("${fileServer.url}")
     private String fileUrl;
 
-    @RequestMapping("fileUpload")
+    //编写一个文件上传方法
+    @PostMapping("fileUpload")
     public Result<String> fileUpload(MultipartFile file) throws Exception{
-        String configFile = this.getClass().getResource("/tracker.conf").getFile();//注意路径中有/
-        String path = null;
+        //D:\JAVA0327-CODE\omall-parent\service\service-product\src\main\resources\tracker.conf
+        String configFile  = this.getClass().getResource("/tracker.conf").getFile();
+        String path="";
+        System.out.println("aa");
+        //判断配置文件路径是否为空
+        if(configFile!=null){
 
-        if (configFile!=null){
-            // 初始化
+            //加载配置文件
             ClientGlobal.init(configFile);
-            // 创建trackerClient
+            //创建一个连接到Tracker server的客户端对象
             TrackerClient trackerClient = new TrackerClient();
-            // 获取trackerService
-            TrackerServer trackerServer = trackerClient.getConnection();
-            // 创建storageClient1
-            StorageClient1 storageClient1 = new StorageClient1(trackerServer, null);
-            path = storageClient1.upload_appender_file1(file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()), null);
-            System.out.println(fileUrl + path);
+            TrackerServer trackerServer = trackerClient.getConnection();//使用trackerClient连接到对应Tracker server
+            //创建一个连接到Storage server的客户端对象
+            StorageClient1 storageClient = new StorageClient1(trackerServer, null);
+
+            //调用storageClient执行文件上传操作
+            //1.txt 2.c 3.exe 4.xlsx
+            path = storageClient.upload_appender_file1(file.getBytes(), FilenameUtils.getExtension(file.getOriginalFilename()), null);
+            System.out.println("上传文件成功:"+fileUrl+path);
+
         }
+
         return Result.ok(fileUrl+path);
     }
-
 }

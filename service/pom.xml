@@ -8,20 +8,17 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <!--父工程-->
-    <packaging>pom</packaging>
+
+    <artifactId>service</artifactId>
+<packaging>pom</packaging>
     <modules>
         <module>service-product</module>
+        <module>service-item</module>
     </modules>
-    <artifactId>service</artifactId>
-
-
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-
     <dependencies>
         <!--依赖服务的工具类-->
         <dependency>

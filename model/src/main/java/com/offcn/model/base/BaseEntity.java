@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
 
     @ApiModelProperty(value = "id")
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.AUTO)//映射到数据库主键
     private Long id;
 
 

@@ -4,7 +4,7 @@ package com.offcn.common.constant;
  * Redis常量配置类
  * set name admin
  */
-public class RedisConst {
+public  class RedisConst {
 
     public static final String SKUKEY_PREFIX = "sku:";
     public static final String SKUKEY_SUFFIX = ":info";

@@ -9,11 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface BaseAttrInfoMapper extends BaseMapper<BaseAttrInfo> {
-    /**
-     * 根据分类Id 查询平台属性集合对象 | 编写xml 文件
-     * @param category1Id
-     * @param category2Id
-     * @param category3Id
-     * @return
-     */
-    List<BaseAttrInfo> selectBaseAttrInfoList(@Param("category1Id")Long category1Id, @Param("category2Id")Long category2Id, @Param("category3Id")Long category3Id);}
+
+//定义根据指定一级、二级、三级分类编号，查询平台属性数据
+    List<BaseAttrInfo> selectBaseAttrInfoList(@Param("category1Id") Long category1Id, @Param("category2Id")Long category2Id, @Param("category3Id")Long category3Id);
+}

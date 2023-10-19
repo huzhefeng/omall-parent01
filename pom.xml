@@ -8,24 +8,28 @@
         <module>model</module>
         <module>service</module>
         <module>server-gateway</module>
+        <module>service-client</module>
+        <module>web</module>
     </modules>
 
-    <!--引入spring boot 父工程-->
+    <!--第一个重点：引入spring boot 父工程-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.1.RELEASE</version>
     </parent>
+
     <groupId>com.offcn</groupId>
     <artifactId>omall-parent</artifactId>
     <version>1.0</version>
-    <!--父工程-->
-    <packaging>pom</packaging>
+
+
+
+<!--  第2个重点：  声明是一个父工程-->
+<packaging>pom</packaging>
 
     <!--定义jar包的版本号-->
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
         <java.version>1.8</java.version>
         <cloud.version>Hoxton.RELEASE</cloud.version>
         <cloud.alibaba.version>2.2.2.RELEASE</cloud.alibaba.version>
@@ -36,7 +40,6 @@
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <lombok.version>1.18.10</lombok.version>
     </properties>
-
     <!--配置dependencyManagement锁定依赖的版本 并不是实际的依赖。-->
     <dependencyManagement>
         <dependencies>
@@ -96,7 +99,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <!--maven 的中央仓库？ 私服{nexus}？ setting.xml-->
+<!-- 第4个重点   指定私服maven仓库、公服maven仓库地址-->
     <repositories>
         <repository>
             <id>nexus-aliyun</id>

@@ -22,51 +22,57 @@ public class BaseTrademarkController {
     @Autowired
     private BaseTrademarkService baseTrademarkService;
 
-    @GetMapping("getTrademarkList")
-    public Result<List<BaseTrademark>> getTrademarkList(){
-        List<BaseTrademark> baseTrademarkList = baseTrademarkService.list(null);
-        return Result.ok(baseTrademarkList);
-    }
-
-
-    @ApiOperation(value = "分页列表")
+    //分页读取品牌列表数据方法
+    @ApiOperation(value = "分页读取品牌列表数据方法")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page",value = "页码",paramType = "path",dataType = "Long"),
             @ApiImplicitParam(name = "limit",value = "每页显示记录数",paramType = "path",dataType = "Long")
     })
     @GetMapping("{page}/{limit}")
-    public Result index(@PathVariable("page") Long page,
-                        @PathVariable("limit") Long limit){
-        Page<BaseTrademark> pageParam = new Page<>(page, limit);
-        IPage<BaseTrademark> pageModel = baseTrademarkService.getPage(pageParam);
-        return Result.ok(pageModel);
+    public Result index(@PathVariable("page") Long page,@PathVariable("limit") Long size){
+        //创建一个分页参数封装对象
+        Page<BaseTrademark> baseTrademarkPage = new Page<>(page, size);
+        IPage<BaseTrademark> pageResult = baseTrademarkService.getPage(baseTrademarkPage);
+        return Result.ok(pageResult);
     }
 
-    @ApiOperation(value = "获取BaseTrademark")
+    //根据品牌编号，获取品牌详细信息
     @GetMapping("get/{id}")
-    public Result get(@PathVariable String id) {
+    public Result get(@PathVariable("id") String id){
         BaseTrademark baseTrademark = baseTrademarkService.getById(id);
         return Result.ok(baseTrademark);
     }
 
-    @ApiOperation(value = "新增BaseTrademark")
+    //新增品牌
     @PostMapping("save")
-    public Result save(@RequestBody BaseTrademark banner) {
-        baseTrademarkService.save(banner);
-        return Result.ok();
+    public Result save(@RequestBody BaseTrademark baseTrademark){
+        try {
+            baseTrademarkService.save(baseTrademark);
+            return Result.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.fail();
+        }
     }
 
-    @ApiOperation(value = "修改BaseTrademark")
+    //修改品牌数据
     @PutMapping("update")
-    public Result updateById(@RequestBody BaseTrademark banner) {
-        baseTrademarkService.updateById(banner);
+    public Result updateById(@RequestBody BaseTrademark baseTrademark){
+        baseTrademarkService.updateById(baseTrademark);
         return Result.ok();
     }
 
-    @ApiOperation(value = "删除BaseTrademark")
+    //删除品牌数据
     @DeleteMapping("remove/{id}")
-    public Result remove(@PathVariable Long id) {
+    public Result remove(@PathVariable("id") Long id){
         baseTrademarkService.removeById(id);
         return Result.ok();
+    }
+
+    //加载全部品牌数据
+    @GetMapping("getTrademarkList")
+    public Result getTrademarkList(){
+        List<BaseTrademark> baseTrademarkList = baseTrademarkService.list(null);
+        return Result.ok(baseTrademarkList);
     }
 }

@@ -10,10 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common</artifactId>
-    <packaging>pom</packaging>
     <modules>
         <module>common-util</module>
         <module>service-util</module>
+        <module>web-util</module>
     </modules>
 
     <properties>
@@ -21,10 +21,12 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+<!--            依赖不传递-->
             <scope>provided </scope>
         </dependency>
 
@@ -59,5 +61,4 @@
         </dependency>
 
     </dependencies>
-
 </project>

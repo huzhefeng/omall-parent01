@@ -7,13 +7,11 @@ import com.offcn.model.product.SkuInfo;
 import com.offcn.model.product.SpuImage;
 import com.offcn.model.product.SpuSaleAttr;
 import com.offcn.product.service.ManageService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "商品SKU接口")
 @RestController
 @RequestMapping("admin/product")
 public class SkuManageController {
@@ -21,70 +19,43 @@ public class SkuManageController {
     @Autowired
     private ManageService manageService;
 
-    /**
-     * 根据spuId 查询spuImageList
-     * @param spuId
-     * @return
-     */
+    //读取指定spu编号的商品配图
     @GetMapping("spuImageList/{spuId}")
-    public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") Long spuId) {
+    public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") Long spuId){
         List<SpuImage> spuImageList = manageService.getSpuImageList(spuId);
         return Result.ok(spuImageList);
     }
 
-    /**
-     * 根据spuId 查询销售属性集合
-     * @param spuId
-     * @return
-     */
+    //读取指定spu编号的销售属性、属性值数据
     @GetMapping("spuSaleAttrList/{spuId}")
-    public Result<List<SpuSaleAttr>> getSpuSaleAttrList(@PathVariable("spuId") Long spuId) {
+    public Result getSpuSaleAttrList(@PathVariable("spuId") Long spuId){
         List<SpuSaleAttr> spuSaleAttrList = manageService.getSpuSaleAttrList(spuId);
+
         return Result.ok(spuSaleAttrList);
     }
 
-    /**
-     * 保存sku
-     * @param skuInfo
-     * @return
-     */
+    //保存sku数据处理方法
     @PostMapping("saveSkuInfo")
     public Result saveSkuInfo(@RequestBody SkuInfo skuInfo){
-        //调用服务层
         manageService.saveSkuInfo(skuInfo);
         return Result.ok();
     }
 
-    /**
-     * sku分页列表
-     * @param page
-     * @param limit
-     * @return
-     */
+    //读取skuinfo列表+分页
     @GetMapping("/list/{page}/{limit}")
-    public Result index(@PathVariable Long page,
-                        @PathVariable Long limit){
-        Page<SkuInfo> pageParam  = new Page<>(page,limit);
-        IPage<SkuInfo> skuInfoIPage = manageService.getPge(pageParam);
-        return Result.ok(skuInfoIPage);
+    public Result index(@PathVariable("page") Long page,@PathVariable("limit") Long size){
+        //把获取到分页参数，封装到一个分页参数封装对象
+        Page<SkuInfo> skuInfoPage = new Page<>(page, size);
+        IPage<SkuInfo> resultPage = manageService.getPage(skuInfoPage);
+        return Result.ok(resultPage);
     }
 
-    /**
-     * 商品上架
-     * @param skuId
-     * @return
-     */
     @GetMapping("onSale/{skuId}")
     public Result onSale(@PathVariable("skuId") Long skuId){
         manageService.onSale(skuId);
         return Result.ok();
     }
 
-    /**
-     * 商品下架
-     * @param skuId
-     * @return
-     */
     @GetMapping("cancelSale/{skuId}")
     public Result cancelSale(@PathVariable("skuId") Long skuId){
         manageService.cancelSale(skuId);
