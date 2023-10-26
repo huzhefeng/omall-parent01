@@ -26,7 +26,7 @@ public class Goods {
     @Field(type = FieldType.Double)
     private Double price;
 
-    @Field(type = FieldType.Date,format = DateFormat.basic_date_time)
+    @Field(type = FieldType.Date)
     private Date createTime; // 新品
 
     @Field(type = FieldType.Long)

@@ -19,6 +19,7 @@ public  class RedisConst {
     public static final long SKULOCK_EXPIRE_PX2 = 1;
     public static final String SKULOCK_SUFFIX = ":lock";
 
+    //配置购物车相关redis参数
     public static final String USER_KEY_PREFIX = "user:";
     public static final String USER_CART_KEY_SUFFIX = ":cart";
     public static final long USER_CART_EXPIRE = 60 * 60 * 24 * 7;

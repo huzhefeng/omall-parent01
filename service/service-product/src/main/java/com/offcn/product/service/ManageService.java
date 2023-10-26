@@ -108,4 +108,12 @@ public interface ManageService {
 
     //获取全部分类数据、按照层级关系逐层封装json
     List<JSONObject> getBaseCategoryList();
+
+
+    //根据品牌id，获取品牌信息
+    BaseTrademark getTrademarkByTmId(Long tmId);
+
+
+    //根据传入sku编号，获取对应平台属性集合数据
+    List<BaseAttrInfo> getAttrList(Long skuId);
 }

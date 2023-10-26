@@ -28,6 +28,7 @@ public enum ResultCodeEnum {
     SECKILL_ORDER_SUCCESS(218, "下单成功"),
     COUPON_GET(220, "优惠券已经领取"),
     COUPON_LIMIT_GET(221, "优惠券已发放完毕"),
+    LOGING_FAIL(403,"IP不一致拒绝登录")
     ;
 
     private Integer code;

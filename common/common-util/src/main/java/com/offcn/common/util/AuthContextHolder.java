@@ -5,6 +5,7 @@ package com.offcn.common.util;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 /**
  * 获取登录用户信息类
@@ -20,6 +21,7 @@ public class AuthContextHolder {
     public static String getUserId(HttpServletRequest request) {
         String userId = request.getHeader("userId");
         return StringUtils.isEmpty(userId) ? "" : userId;
+
     }
 
     /**

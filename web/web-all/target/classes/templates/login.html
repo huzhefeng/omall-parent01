@@ -132,10 +132,11 @@
 						//	输入日志：是否有 originUrl 回跳url！
 						//	originUrl = 记录用户在哪点击的登录url ，当用户登录成功之后，又跳转到了原来的url！
                         console.log("originUrl:"+this.originUrl);
-                        if(this.originUrl == ''){
+                        if(this.originUrl == ''||this.originUrl== null){
                             window.location.href="http://www.omall.com/index.html"
                             return ;
                         } else {
+							//做url解码
                             window.location.href = decodeURIComponent(this.originUrl)
 						}
                     } else {

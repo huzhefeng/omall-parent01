@@ -33,5 +33,12 @@
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
+<!--        引入springboot整合redis的所需依赖库-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+
     </dependencies>
 </project>

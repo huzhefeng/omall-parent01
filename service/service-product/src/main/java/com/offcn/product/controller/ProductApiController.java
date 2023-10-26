@@ -2,9 +2,7 @@ package com.offcn.product.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.offcn.common.result.Result;
-import com.offcn.model.product.BaseCategoryView;
-import com.offcn.model.product.SkuInfo;
-import com.offcn.model.product.SpuSaleAttr;
+import com.offcn.model.product.*;
 import com.offcn.product.client.ProductFeignClient;
 import com.offcn.product.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +65,20 @@ public class ProductApiController implements ProductFeignClient {
     public Result getBaseCategoryList(){
         List<JSONObject> baseCategoryList = manageService.getBaseCategoryList();
         return Result.ok(baseCategoryList);
+    }
+
+    //根据品牌编号，获取品牌信息
+    @Override
+    @GetMapping("inner/getTrademark/{tmId}")
+    public BaseTrademark getTrademark(@PathVariable("tmId") Long tmId){
+        return manageService.getTrademarkByTmId(tmId);
+
+    }
+
+    //根据sku编号，获取平台属性数据集合
+    @Override
+    @GetMapping("inner/getAttrList/{skuId}")
+    public List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId){
+      return   manageService.getAttrList(skuId);
     }
 }

@@ -24,6 +24,12 @@
             <artifactId>service-product-client</artifactId>
             <version>1.0</version>
         </dependency>
+<!--        引入搜索服务放入客户依赖库-->
+        <dependency>
+            <groupId>com.offcn</groupId>
+            <artifactId>service-list-client</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

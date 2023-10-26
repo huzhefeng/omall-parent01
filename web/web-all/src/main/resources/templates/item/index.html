@@ -874,7 +874,7 @@
             addToCart() {
                 // 判断是否登录和是否存在临时用户，如果都没有，添加临时用户
                 if(!auth.isTokenExist() && !auth.isUserTempIdExist()) {
-                    auth.setUserTempId()
+                    auth.setUserTempId() //生成临时用户，存储到cookie
                 }
 
                 // 获取来源信息

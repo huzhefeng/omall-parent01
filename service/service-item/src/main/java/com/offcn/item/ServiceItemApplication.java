@@ -11,8 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"com.offcn.item","com.offcn.product.client"})
-@EnableFeignClients(basePackages = {"com.offcn.product.client"})
+@ComponentScan(basePackages = {"com.offcn.item","com.offcn.product.client","com.offcn.list.client"})
+@EnableFeignClients(basePackages = {"com.offcn.product.client","com.offcn.list.client"})
 public class ServiceItemApplication {
 
     public static void main(String[] args) {

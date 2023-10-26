@@ -84,6 +84,10 @@ public class ManageServiceImpl implements ManageService {
     //注入redisson客户端工具对象
     @Autowired
     private RedissonClient redissonClient;
+
+    //注入品牌的数据操作接口
+    @Autowired
+    private BaseTrademarkMapper baseTrademarkMapper;
    // StringRedisTemplate 处理字符串   aaa
     /**
      * 获取全部一级分类数据方法
@@ -630,5 +634,15 @@ public class ManageServiceImpl implements ManageService {
 
 
         return list;
+    }
+
+    @Override
+    public BaseTrademark getTrademarkByTmId(Long tmId) {
+        return baseTrademarkMapper.selectById(tmId);
+    }
+
+    @Override
+    public List<BaseAttrInfo> getAttrList(Long skuId) {
+        return baseAttrInfoMapper.selectBaseAttrInfoListBySkuId(skuId);
     }
 }

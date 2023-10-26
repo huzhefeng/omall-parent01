@@ -17,6 +17,12 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
+<!--        依赖购物车客户端所需类库-->
+        <dependency>
+            <groupId>com.offcn</groupId>
+            <artifactId>service-cart-client</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>com.offcn</groupId>
             <artifactId>service-item-client</artifactId>
@@ -26,6 +32,17 @@
         <dependency>
             <groupId>com.offcn</groupId>
             <artifactId>service-product-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+<!--        依赖搜索微服务的客户端依赖库-->
+        <dependency>
+            <groupId>com.offcn</groupId>
+            <artifactId>service-list-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.offcn</groupId>
+            <artifactId>web-util</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

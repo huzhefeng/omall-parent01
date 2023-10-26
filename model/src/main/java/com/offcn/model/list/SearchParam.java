@@ -29,12 +29,12 @@ public class SearchParam {
 
     private String keyword;//检索的关键字
 
-    // order=1:asc  排序规则   0:asc
+    // order=1:asc  排序规则   1:asc  desc
     private String order = "";// 1：综合排序/热点  2：价格
 
-    //props=23:4G:运行内存
+    //props=      23:4G:运行内存
     private String[] props;//页面提交的数组
 
     private Integer pageNo = 1;//分页信息
-    private Integer pageSize = 12;
+    private Integer pageSize = 10;
 }

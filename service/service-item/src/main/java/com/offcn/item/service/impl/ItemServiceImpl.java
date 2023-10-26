@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.offcn.common.result.Result;
 import com.offcn.common.result.ResultCodeEnum;
 import com.offcn.item.service.ItemService;
+import com.offcn.list.client.ListFeignClient;
 import com.offcn.model.product.BaseCategoryView;
 import com.offcn.model.product.SkuInfo;
 import com.offcn.model.product.SpuSaleAttr;
@@ -23,6 +24,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ProductFeignClient productFeignClient;
+
+    //注入搜索服务feign接口
+    @Autowired
+    private ListFeignClient listFeignClient;
 
     //注入线程池对象
     @Autowired
@@ -78,7 +83,12 @@ public class ItemServiceImpl implements ItemService {
             return skuInfo;
         },threadPoolExecutor);
 
-      //定义获取销售属性数据接口调用
+    //使用异步线程池更新商品浏览次数
+        CompletableFuture<Void> incrHotScoreCompletableFuture  = CompletableFuture.runAsync(() -> {
+            listFeignClient.incrHotScore(skuId);
+        }, threadPoolExecutor);
+
+        //定义获取销售属性数据接口调用
        CompletableFuture<Void> spuSaleAttrCompletableFuture= skuInfoCompletableFuture.thenAcceptAsync(skuInfo -> {
             //调用feign接口，读取销售属性数据
             List<SpuSaleAttr> spuSaleAttrList = productFeignClient.getSpuSaleAttrListCheckBySku(skuId, skuInfo.getSpuId());
@@ -114,7 +124,7 @@ public class ItemServiceImpl implements ItemService {
         },threadPoolExecutor);
 
       //把前面执行异步线程连接到一起，等待全部线程执行完毕
-        CompletableFuture.allOf(skuInfoCompletableFuture,spuSaleAttrCompletableFuture,skuValuesCompletableFuture,priceCompletableFuture,baseCategoryCompletableFuture).join();
+        CompletableFuture.allOf(skuInfoCompletableFuture,spuSaleAttrCompletableFuture,skuValuesCompletableFuture,priceCompletableFuture,baseCategoryCompletableFuture,incrHotScoreCompletableFuture).join();
 
 
 

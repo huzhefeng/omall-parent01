@@ -1,9 +1,7 @@
 package com.offcn.product.client;
 
 import com.offcn.common.result.Result;
-import com.offcn.model.product.BaseCategoryView;
-import com.offcn.model.product.SkuInfo;
-import com.offcn.model.product.SpuSaleAttr;
+import com.offcn.model.product.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,4 +59,11 @@ public interface ProductFeignClient {
 
     @GetMapping("/api/product/inner/getBaseCategoryList")
     public Result getBaseCategoryList();
+
+    //根据品牌编号，获取品牌信息
+    @GetMapping("/api/product/inner/getTrademark/{tmId}")
+    public BaseTrademark getTrademark(@PathVariable("tmId") Long tmId);
+
+    @GetMapping("/api/product/inner/getAttrList/{skuId}")
+    public List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId);
 }

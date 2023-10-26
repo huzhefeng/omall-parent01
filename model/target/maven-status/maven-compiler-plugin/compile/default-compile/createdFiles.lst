@@ -1,5 +1,3 @@
-com\offcn\model\activity\ActivityRuleVo.class
-com\offcn\model\activity\ActivityRule.class
 com\offcn\model\product\SkuImage.class
 com\offcn\model\product\SpuImage.class
 com\offcn\model\user\UserInfo.class
@@ -11,12 +9,9 @@ com\offcn\model\product\SpuInfo.class
 com\offcn\model\product\SpuSaleAttr.class
 com\offcn\model\order\OrderInfo.class
 com\offcn\model\product\BaseCategory2.class
-com\offcn\model\base\BaseEntity.class
 com\offcn\model\product\BaseAttrValue.class
 com\offcn\model\list\SearchAttr.class
 com\offcn\model\product\BaseCategory1.class
-com\offcn\model\activity\ActivityInfo.class
-com\offcn\model\activity\OrderRecode.class
 com\offcn\model\list\SearchParam.class
 com\offcn\model\list\SearchResponseTmVo.class
 com\offcn\model\product\BaseTrademark.class
@@ -39,5 +34,3 @@ com\offcn\model\list\Goods.class
 com\offcn\model\payment\PaymentInfo.class
 com\offcn\model\product\SkuAttrValue.class
 com\offcn\model\product\BaseCategory3.class
-com\offcn\model\activity\ActivitySku.class
-com\offcn\model\activity\CouponInfo.class
